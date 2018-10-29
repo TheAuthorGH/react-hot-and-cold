@@ -1,0 +1,74 @@
+div.hacgame {
+	width: 480px;
+}
+
+.hacgame h3 {
+	font-size: 18px;
+	text-align: center;
+	margin: 16px 0px 8px 0px;
+	padding-top: 8px;
+	border-top: 1px #AAA solid;
+}
+
+.hacgame form {
+	display: flex;
+	flex-direction: column;
+}
+
+.hacgame input {
+	border: 1px #AAA solid;
+
+	width: 100%;
+	margin: 8px 0px;
+	padding: 8px;
+}
+
+.hacgame button[type="submit"] {
+	font-size: 18px;
+	background-color: #424;
+
+	padding: 8px 16px;
+
+	cursor: pointer;
+}
+
+.hacgame ul.hacgame-history {
+	display: flex;
+	overflow-x: auto;
+}
+
+.hacgame-tempmsg {
+	font-size: 22px;
+	font-weight: bold;
+	text-align: center;
+	margin: 8px 0px 32px 0px;
+}
+
+.hacgame ul.hacgame-history li {
+	margin: 8px 0px;
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.hacgame-hot {
+	color: #F77;
+	text-shadow: 1px 1px #811;
+}
+
+.hacgame-warm {
+	color: #D95;
+	text-shadow: 1px 1px #831;
+}
+
+.hacgame-cold {
+	color: #77F;
+	text-shadow: 1px 1px #118;
+}
+
+.hacgame ul.hacgame-history li:not(:first-child) {
+	margin-left: 8px;
+}
+
+.hacgame ul.hacgame-history li:not(:last-child) {
+	margin-right: 8px;
+}
