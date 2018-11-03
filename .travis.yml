@@ -5,3 +5,9 @@ cache:
     - node_modules
 env:
   - CI=true
+deploy:
+  provider: heroku
+  api_key: "5fe84953-d3a3-4213-a3ba-a6c453ee4be2"
+  app: young-shelf-51450
+  on:
+    repo: TheAuthorGH/mealtracker
