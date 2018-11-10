@@ -1,4 +1,4 @@
 import {createStore} from "redux";
-import {hacReducer} from './hacreducer';
+import {hacReducer} from './reducers/hacreducer';
 
 export default createStore(hacReducer);

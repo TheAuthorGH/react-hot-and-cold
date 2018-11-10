@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 import './hacgame.css';
 
-import * as actions from '../hacactions';
+import * as actions from '../actions/hacactions';
 
 export class HACGame extends React.Component {
 

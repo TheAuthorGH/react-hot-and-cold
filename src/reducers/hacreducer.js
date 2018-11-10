@@ -1,4 +1,4 @@
-import * as actions from './hacactions';
+import * as actions from '../actions/hacactions';
 
 export function initialState() {
 	return {
