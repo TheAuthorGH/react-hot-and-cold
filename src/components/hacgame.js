@@ -1,46 +1,28 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 import './hacgame.css';
 
-export default class HACGame extends React.Component {
+import * as actions from '../hacactions';
 
-	constructor(props) {
-		super(props);
-		this.state = this.startState();
+export class HACGame extends React.Component {
+
+	resetGame() {
+		this.props.dispatch(actions.resetGame());
 	}
 
-	startState() {
-		return {
-			answer: Math.round(Math.random() * 100),
-			history: [],
-			last() { 
-				return this.history[this.history.length - 1]
-			},
-			gameover: false
-		};
-	}
-
-	resetState() {
-		this.setState(this.startState());
-	}
-
-	guess(number) {
-		if(!this.state.history.includes(number))
-			this.setState({
-				history: [...this.state.history, number]
-			});
-		if(number === this.state.answer)
-			this.setState({gameover: true});
+	submitNumber(num) {
+		this.props.dispatch(actions.submitNumber(num));
 	}
 
 	onSubmit(event) {
 		event.preventDefault();
-		this.guess(Number(this.numberInput.value));
+		this.submitNumber(Number(this.numberInput.value));
 		this.numberInput.value = '';
 	}
 
 	getTemp(num) {
-		const diff = Math.abs(this.state.answer - num);
+		const diff = Math.abs(this.props.answer - num);
 		if(diff < 5)
 			return 'Hot';
 		else if(diff < 15)
@@ -49,24 +31,28 @@ export default class HACGame extends React.Component {
 			return 'Cold';
 	}
 
+	getLast() {
+		return this.props.history[this.props.history.length - 1];
+	}
+
 	render() {
 		let temp;
-		if(this.state.history.length < 1)
+		if(this.props.history.length < 1)
 			temp = '';
 		else
-			temp = this.getTemp(this.state.last());
+			temp = this.getTemp(this.getLast());
 
 		const tempClass = 'hacgame-' + temp.toLowerCase();
 		const tempMessage = temp ? <p className="hacgame-tempmsg">You are <span className={tempClass}>{temp}</span>!</p> : <p className="hacgame-tempmsg"></p> ;
-		const history = this.state.history
+		const history = this.props.history
 			.sort().map((num, index) => <li key={index} className={'hacgame-' + this.getTemp(num).toLowerCase()}>{num}</li>);
 		
-		if(this.state.gameover)
+		if(this.props.gameover)
 			return (
 				<div className="hacgame">
 					<h3>YOU WON!</h3>
 					<form onSubmit={e => e.preventDefault()}>
-						<button type="submit" onClick={() => this.resetState()}>Play Again</button>
+						<button type="submit" onClick={() => this.resetGame()}>Play Again</button>
 					</form>
 				</div>
 			);
@@ -92,3 +78,11 @@ export default class HACGame extends React.Component {
 	}
 
 }
+
+const mapStateToProps = state => ({
+	answer: state.answer,
+	history: state.history,
+	gameover: state.gameover
+});
+
+export default connect(mapStateToProps)(HACGame);
